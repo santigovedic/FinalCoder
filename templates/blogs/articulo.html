@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block cambiante %}
+    <hr>
+    <hr>
+    <hr>
+    <hr><br>
+    <p>{{ fecha }}</p>
+    <h6>Titulo: {{ titulo }}</h6>
+    <p>Descripcion: {{ subtitulo }}</p>
+    <hr>
+    <p>Receta: {{ cuerpo }}</p>
+    <br>
+    <p>Foto ilustrativa:</p>
+    <img src="{{ imagen.url }}"
+         height="500 px">
+    <br>
+    <hr>
+    <p>Autor: {{ autor }}</p>
+    <hr>
+    Fijate que dice la comunidad:
+    <a href="{% url 'mostrarcom' titulo %}">
+        <button>Ver comentarios</button>
+    </a>
+    <br><br>
+    Volvé a la lista de articulos:
+    <a href="{% url 'articulos' %}">
+        <button>Regresar</button>
+    </a>
+    <hr>
+{% endblock %}

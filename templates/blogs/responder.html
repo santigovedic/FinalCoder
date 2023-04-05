@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block cambiante %}
+    <hr>
+    <hr>
+    <hr>
+    <hr><br>
+    <h6>Que te gustaría agregar?</h6>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Responder</button>
+    </form>
+    <br>
+    Volvé a la lista de artículos:
+    <a href="{% url 'articulos' %}">
+        <button>Regresar</button>
+    </a>
+    <br><br>
+{% endblock %}

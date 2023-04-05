@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cambiante %}
+    <hr>
+    <hr>
+    <hr>
+    <hr><br>
+    <h6>DOS PASIONES EN UN MISMO LUGAR</h6>
+    <br>
+    <p>Hola! Mi nombre es Santiago Govedic, tengo 23 años, y estoy casi recibido de administrador de empresas.
+        Aun así, encontré en el servicio de bebidas y en la programación dos de las mayores cosas que me dan ganas de
+        levantarme de la cama todos los días.</p>
+    <p>Por eso, es que nació esta página, con la premisa de que cualquiera puede ser un bartender exitoso.
+        El objetivo es que se forme una comunidad donde los más experimentados ayuden a los más nuevos, o inclusive,
+        donde puedas sacar las ideas de tragos que vos quieras.</p>
+    <p>¿Que mejor que tener al alcance de tu mano cualquier receta de bebidas que quieras para el momento que quieras?
+        Ya sea para estar en familia, con amigos, o sol@,
+        Hacktender siempre va a estar ahí para vos cuando lo necesites. ¡A disfrutar!</p>
+    <p>Este soy yo, genuino como siempre:</p>
+    <br>
+    <img src="yo.jpeg" height="200px" width="200px"> {# No se porque no me la lee. VER. #}
+    <br><br>
+    <a href="{% url 'inicio' %}">
+        <button>Regresar</button>
+    </a>
+    <hr>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block cambiante %}
+    <hr>
+    <hr>
+    <hr>
+    <hr><br>
+    <h6>Comentarios a este post:</h6>
+    <hr>
+
+    {% if comentarios %}
+        {% for com in comentarios %}
+            <p>Titulo: {{ com.titulo }}</p>
+            <p>Comentario: {{ com.comentar }}</p>
+            <p>Autor: {{ com.author }}</p>
+            <a href="{% url "responder" %}">Responder</a>
+            <a href="{% url "mostrart" com.titulo %}">Ver respuestas</a>
+        {% endfor %}
+    {% else %}
+        No hay comentarios aún.
+    {% endif %}
+    <hr>
+    <a href="{% url 'articulos' %}">
+        <button>Regresar</button>
+    </a>
+    <br><br>
+{% endblock %}

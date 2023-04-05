@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block cambiante %}
+    <hr>
+    <hr>
+    <hr>
+    <hr><br>
+    <h6>Respuestas al comentario:</h6>
+    <hr>
+
+    {% if respuestas %}
+        {% for resp in respuestas %}
+            <p>{{ resp }}</p>
+        {% endfor %}
+    {% else %}
+        No hay respuestas aún.
+    {% endif %}
+    <hr>
+    <a href="{% url 'articulos' %}">
+        <button>Regresar</button>
+    </a>
+    <br><br>
+{% endblock %}
