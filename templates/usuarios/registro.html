@@ -10,6 +10,12 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Registrarse</button>
-    </form>
-    <br>
+    </form> <br>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

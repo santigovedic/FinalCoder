@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from blogs.forms import ArtForm, BuscarArtForm, ComForm, RespComForm
-from blogs.models import Articulo, Comentario, RespCom
+from blogs.forms import ArtForm, BuscarArtForm, ComForm
+from blogs.models import Articulo, Comentario
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def inicio(request):  # Home de la web en general.
@@ -51,6 +52,8 @@ def edit_art(request, titulo):  # Esta vista permite que cada usuario pueda edit
 
             art.save()
             return redirect("inicio")
+        else:
+            messages.warning(request, "No se pudo editar el artículo.")
 
     form = ArtForm(initial={
         "titulo": art.titulo,
@@ -124,7 +127,7 @@ def coment_art(request):  # Esta vista permite que un usuario comente el artícu
 
 
 @login_required
-def mostrar_com(request, titulo):  # Esta vista permite listar los comentarios a cada articulo en particular.
+def mostrar_com(request, titulo):  # Esta vista permite listar los comentarios a cada artículo en particular.
     articulos = Articulo.objects.get(titulo=titulo)
     art_id = articulos.id
     com = Comentario.objects.filter(articulo_id=art_id)
@@ -132,29 +135,4 @@ def mostrar_com(request, titulo):  # Esta vista permite listar los comentarios a
     return render(request, "blogs/mostrarCom.html", context=contexto)
 
 
-@login_required
-def responder(request):  # Esta vista permite responder a cada comentario en particular.
 
-    if request.method == "POST":
-        resp_form = RespComForm(request.POST)
-
-        if resp_form.is_valid():
-            info = resp_form.cleaned_data
-            resp_form = RespCom(fecha=info["fecha"],
-                                responder=info["responder"],
-                                autor=request.user)  # Me falta la respuesta.
-            resp_form.save()
-            return redirect("articulos")
-
-    resp_form = RespComForm()
-    contexto = {"form": resp_form}
-    return render(request, "blogs/responder.html", context=contexto)
-
-
-@login_required
-def mostrar_resp(request, titulo):
-    comentario = Comentario.objects.get(titulo=titulo)
-    com_id = comentario.id
-    resp = RespCom.objects.filter(respuesta_id=com_id)
-    contexto = {"respuestas": resp, "comentario": comentario}
-    return render(request, "blogs/mostrarResp.html", context=contexto)

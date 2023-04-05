@@ -13,13 +13,11 @@
             <p>Titulo: {{ com.titulo }}</p>
             <p>Comentario: {{ com.comentar }}</p>
             <p>Autor: {{ com.author }}</p>
-            <a href="{% url "responder" %}">Responder</a>
-            <a href="{% url "mostrart" com.titulo %}">Ver respuestas</a>
+            <hr>
         {% endfor %}
     {% else %}
         No hay comentarios aún.
     {% endif %}
-    <hr>
     <a href="{% url 'articulos' %}">
         <button>Regresar</button>
     </a>

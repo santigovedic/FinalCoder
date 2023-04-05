@@ -44,7 +44,7 @@
                                                          href="{% url 'logout' %}">Log Out</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
                                                          href="{% url 'editar' %}">Mi Perfil</a></li>
-                    <img src="{{ user.avatar.imagen.url }}" alt="Usuario" height="30 px">
+                    <img src="{{ user.avatar.imagen.url }}" alt="Usuario" height="60 px">
                 {% else %}
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
                                                          href="{% url 'login' %}">Log In</a></li>
@@ -58,19 +58,22 @@
 <!-- Masthead-->
 {% block cambiante %}
     <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
+        <div class="container d-flex align-items-center justify-content-center flex-column">
             <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">HACKTENDER</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">HACKTENDER</h1><br>
             <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0">Tu mejor bartender de tragos online.</p>
-            <br><br>
+            <p class="masthead-subheading font-weight-light mb-0">Tu bartender de confianza online.</p>
+            <hr>
+            <hr>
+            <hr>
             {% if user.is_authenticated %}
 
-                <br><br>
                 <p class="masthead-subheading font-weight-light mb-0">Si ya tenes sed, seguí por acá:</p><br>
                 <a href="{% url 'articulos' %}"> {# Este va a la pagina donde estan todos los blogs. #}
                     <button>Lista de tragos</button>
                 </a>
+            {% else %}
+                <p class="masthead-subheading font-weight-light mb-0">Iniciá sesión o registrate para acceder a todo el contenido!</p><br>
             {% endif %}
         </div>
     </header>

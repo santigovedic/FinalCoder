@@ -1,5 +1,5 @@
 from django import forms
-from blogs.models import Articulo, Comentario, RespCom
+from blogs.models import Articulo, Comentario
 
 
 class ArtForm(forms.ModelForm):
@@ -18,13 +18,6 @@ class ComForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ['date', 'titulo', 'comentar', 'articulo']
-
-
-class RespComForm(forms.ModelForm):
-
-    class Meta:
-        model = RespCom
-        fields = ['fecha', 'responder']
 
 
 

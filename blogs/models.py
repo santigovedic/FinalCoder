@@ -23,14 +23,3 @@ class Comentario(models.Model):  # Este modelo almacena los comentarios que se h
     comentar = models.TextField()
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE, null=True, related_name="comentarios")
 
-
-class RespCom(models.Model):  # Este modelo almacena las respuestas a c/ comentario en particular.
-
-    fecha = models.DateTimeField(default=timezone.now)
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    responder = models.TextField()
-    respuesta = models.ForeignKey(Comentario, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return f"{self.autor} responde: {self.responder}"
-

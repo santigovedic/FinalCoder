@@ -4,9 +4,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from usuarios.forms import UserRegisterForm, UserEditForm
 from usuarios.models import Avatar
+from django.contrib import messages
 
 
-def login_user(request):  # Formulario de inicio de sesión.
+def login_user(request):  # Vista del LOG IN --> Para que el usuario inicie sesión.
 
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -17,30 +18,32 @@ def login_user(request):  # Formulario de inicio de sesión.
 
             if user:
                 login(request, user)
-                # Ver si no le puedo meter un mensaje de exito o que directamente me muestre el avatar.
-                return redirect("inicio")  # Todavia no se si quiero que me lleve al inicio o a la vista donde están todos los blogs, o a la de mi perfil.
-            else:
-                return redirect("inicio")  # Que me lleve a una vista donde no se haya encontrado el usuario. Y me permita de ahi registrarme o reintentar el inicio de sesion.
+                return redirect("inicio")
+        else:
+            messages.warning(request, "El usuario o la contraseña son incorrectos.")
 
     form = AuthenticationForm()
     contexto = {"form": form}
     return render(request, "usuarios/login.html", context=contexto)
 
 
-def registro(request):
+def registro(request):  # Vista de SIGN UP --> Para que un usuario se registre.
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
 
         if form.is_valid():
             form.save()
             return redirect("login")
+        else:
+            messages.warning(request, "No se pudo registrar el usuario.")
 
     form = UserRegisterForm()
     contexto = {"form": form}
     return render(request, "usuarios/registro.html", context=contexto)
 
+
 @login_required
-def editar_user(request):
+def editar_user(request):  # Vista para que un usuario edite su perfil. Si o si debe de estar logueado.
 
     user = request.user
 
@@ -64,6 +67,8 @@ def editar_user(request):
 
             user.save()
             return render(request, "base.html")
+        else:
+            messages.warning(request, "No se pudo editar el usuario.")
 
     form = UserEditForm(initial={
         "username": user.username,
